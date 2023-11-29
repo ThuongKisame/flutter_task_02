@@ -13,11 +13,13 @@ class XylophoneApp extends StatelessWidget {
   }
 
   List<int> playedSounds = [];
-  late Timer timer;
+  late Timer? timer;
 
   void playRecordedSounds(int soundNumber) {
     playedSounds.add(soundNumber);
-
+    if (timer != null) {
+      timer!.cancel();
+    }
     timer = Timer(Duration(seconds: 3), () {
       runListSounds(playedSounds);
       playedSounds.clear();
